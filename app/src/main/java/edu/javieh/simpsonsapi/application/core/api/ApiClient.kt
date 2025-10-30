@@ -15,5 +15,5 @@ class ApiClient {
 
     fun <T> createService(typeClass:Class<T>):T{
         return retrofit.create(typeClass)
-    }
+    }   
 }
