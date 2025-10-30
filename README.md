@@ -1,1 +1,1 @@
-Some commits are maybe useless, but this exercise was done to practice
+Some issues are maybe to small, but this exercise was done to practice
