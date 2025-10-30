@@ -1,5 +1,5 @@
 package edu.javieh.simpsonsapi.application.features.domain
 
 interface SimpsonsRepository {
-     fun getAll():List<Simpson>
+     suspend fun getAll():Result<List<Simpson>>
 }
