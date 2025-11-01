@@ -8,6 +8,6 @@ fun SimpsonApiModel.toModel(): Simpson{
             this.name,
         this.occupation,
                     this.phrases,
-        "https://cdn.thesimpsonsapi.com/500" + this.imageUrl
+        "https://cdn.thesimpsonsapi.com/200" + this.imageUrl
     )
 }
