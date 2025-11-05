@@ -53,7 +53,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     //COIL
-    implementation(libs.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

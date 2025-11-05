@@ -11,13 +11,17 @@ import edu.javieh.simpsonsapi.application.core.api.ApiClient
 import edu.javieh.simpsonsapi.application.features.data.remote.SimpsonsDataRepository
 import edu.javieh.simpsonsapi.application.features.data.remote.api.SimpsonsApiRemoteDataSource
 import edu.javieh.simpsonsapi.application.features.domain.GetAllSimpsonsUseCase
+import edu.javieh.simpsonsapi.application.features.domain.GetByIdSimpsonUseCase
 import edu.javieh.simpsonsapi.application.features.domain.SimpsonsRepository
 
 class MainActivity : AppCompatActivity() {
 
     private val repository = SimpsonsDataRepository(SimpsonsApiRemoteDataSource(ApiClient()))
 
-    private val viewModel = SimpsonsViewModel(GetAllSimpsonsUseCase(repository))
+    //private val viewModel = SimpsonsViewModel(GetAllSimpsonsUseCase(repository))
+
+    private val viewModel = SimpsonViewModel(GetByIdSimpsonUseCase(repository))
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +34,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupObserver()
-        viewModel.loadAllSimpsons()
+        viewModel.loadById(3)
+
     }
     fun setupObserver(){
-        val observer = Observer<SimpsonsViewModel.UiState>{ uiState ->
+        val observer = Observer<SimpsonViewModel.UiState>{ uiState ->
             if(uiState.isLoading){
                 //SPINNER
             } else {
@@ -44,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 //ERROR
             }
 
-            uiState.simpsons
+            uiState.simpson
 
         }
     viewModel.uiState.observe(this, observer)
