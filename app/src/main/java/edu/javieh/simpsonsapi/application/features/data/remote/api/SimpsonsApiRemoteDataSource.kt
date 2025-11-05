@@ -24,4 +24,17 @@ class SimpsonsApiRemoteDataSource(private val apiClient: ApiClient) {
             }
         }
     }
+
+    suspend fun getByIdSimpson(id: Int):Result<Simpson>{
+        return withContext(Dispatchers.IO){
+            val apiResults = apiService.getById(id)
+            if(apiResults.isSuccessful && apiResults.errorBody() == null){
+                val simpsonApiModel : SimpsonApiModel = apiResults.body()!!
+                val simpson = simpsonApiModel.toModel()
+                Result.success(simpson)
+            } else {
+                Result.failure(ErrorApp.ServerError)
+            }
+        }
+    }
 }

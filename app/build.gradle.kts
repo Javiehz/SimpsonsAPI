@@ -52,6 +52,8 @@ dependencies {
     //COROUTINES
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
+    //COIL
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
