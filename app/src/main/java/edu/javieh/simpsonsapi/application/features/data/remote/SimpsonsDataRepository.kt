@@ -8,4 +8,8 @@ class SimpsonsDataRepository(private val simpsonsApiRemoteDataSource: SimpsonsAp
     override suspend fun getAll(): Result<List<Simpson>> {
         return simpsonsApiRemoteDataSource.getAllSimpsons()
     }
+
+    override suspend fun getById(id: Int): Result<Simpson> {
+        return simpsonsApiRemoteDataSource.getByIdSimpson(id)
+    }
 }
