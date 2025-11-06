@@ -16,13 +16,6 @@ import edu.javieh.simpsonsapi.application.features.domain.SimpsonsRepository
 
 class MainActivity : AppCompatActivity() {
 
-    private val repository = SimpsonsDataRepository(SimpsonsApiRemoteDataSource(ApiClient()))
-
-    //private val viewModel = SimpsonsViewModel(GetAllSimpsonsUseCase(repository))
-
-    private val viewModel = SimpsonViewModel(GetByIdSimpsonUseCase(repository))
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,27 +25,5 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        setupObserver()
-        viewModel.loadById(3)
-
     }
-    fun setupObserver(){
-        val observer = Observer<SimpsonViewModel.UiState>{ uiState ->
-            if(uiState.isLoading){
-                //SPINNER
-            } else {
-                //OCULTAMOS SPINNER
-            }
-
-            if(uiState.error != null){
-                //ERROR
-            }
-
-            uiState.simpson
-
-        }
-    viewModel.uiState.observe(this, observer)
-    }
-
 }
