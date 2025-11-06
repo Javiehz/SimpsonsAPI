@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -53,6 +57,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     //COIL
+    implementation(libs.coil3.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
