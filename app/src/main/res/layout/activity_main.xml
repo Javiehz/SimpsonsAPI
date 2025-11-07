@@ -15,7 +15,7 @@
         android:background="@color/material_dynamic_tertiary10"
         android:text="@string/title"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/material_dynamic_tertiary60"
         android:textSize="24sp"
         android:textStyle="bold"
         android:padding="5dp"
