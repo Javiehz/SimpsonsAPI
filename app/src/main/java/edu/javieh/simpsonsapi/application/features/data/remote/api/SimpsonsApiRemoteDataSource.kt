@@ -11,16 +11,26 @@ class SimpsonsApiRemoteDataSource(private val apiClient: ApiClient) {
 
     suspend fun getAllSimpsons(): Result<List<Simpson>> {
         return withContext(Dispatchers.IO) {
-            val apiResults = apiService.getAll()
-            if (apiResults.isSuccessful && apiResults.errorBody() == null) {
-                val simpsonsApiModel: SimpsonsApiModel = apiResults.body()!!
-                val listSimpsonsApiModel: List<CharacterApiModel> = simpsonsApiModel.results
-                val simpsonModel = listSimpsonsApiModel.map { simpsonApiModel ->
-                    simpsonApiModel.toModel()
+            try {
+                val apiResults = apiService.getAll()
+
+                if (apiResults.isSuccessful && apiResults.body() != null) {
+
+                    val simpsonsApiModel: SimpsonsApiModel = apiResults.body()!!
+                    val listSimpsonsApiModel: List<CharacterApiModel> = simpsonsApiModel.results
+
+                    val simpsonModel = listSimpsonsApiModel.map { simpsonApiModel ->
+                        simpsonApiModel.toModel()
+                    }
+
+                    Result.success(simpsonModel)
+
+                } else {
+                    Result.failure(ErrorApp.ServerError)
                 }
-                Result.success(simpsonModel)
-            } else {
-                Result.failure(ErrorApp.ServerError)
+
+            } catch (e: Exception) {
+                Result.failure(ErrorApp.InternetError)
             }
         }
     }
