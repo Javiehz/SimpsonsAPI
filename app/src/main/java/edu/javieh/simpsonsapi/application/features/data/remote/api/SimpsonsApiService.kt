@@ -10,5 +10,5 @@ interface SimpsonsApiService {
     suspend fun getAll(): Response<SimpsonsApiModel>
 
     @GET("characters/{simpsonsId}")
-    suspend fun getById(@Path("simpsonsId") id: Int): Response<SimpsonApiModel>
+    suspend fun getById(@Path("simpsonsId") id: Int): Response<CharacterApiModel>
 }

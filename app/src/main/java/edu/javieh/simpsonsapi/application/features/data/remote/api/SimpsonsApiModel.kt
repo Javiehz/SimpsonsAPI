@@ -7,10 +7,10 @@ data class SimpsonsApiModel(
     val next: String?,
     val prev: String?,
     val pages: Int,
-    val results: List<SimpsonApiModel>
+    val results: List<CharacterApiModel>
 )
 
-data class SimpsonApiModel(
+data class CharacterApiModel(
     val id: Int,
     val age: Int?,
     val birthdate: String?,
