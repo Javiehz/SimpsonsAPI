@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import edu.javieh.simpsonsapi.application.core.api.ApiClient
 import edu.javieh.simpsonsapi.application.features.data.remote.SimpsonsDataRepository
@@ -44,14 +45,12 @@ class SimpsonDetailFragment : Fragment() {
 
     private fun setupObserver() {
         detailViewModel.uiState.observe(this) { uiState ->
-            if (uiState.isLoading) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
-            }
 
-            uiState.error?.let { error ->
-                Log.e("@dev", "Error cargando personaje: $error")
+            binding.progressBar.visibility = if (uiState.isLoading) View.VISIBLE else View.GONE
+
+            if (uiState.error != null) {
+                Toast.makeText(requireContext(), "Error: ${uiState.error}", Toast.LENGTH_SHORT).show()
+                Log.e("@dev", "Error cargando personaje: ${uiState.error}")
             }
 
             uiState.simpson?.let { simpson ->
