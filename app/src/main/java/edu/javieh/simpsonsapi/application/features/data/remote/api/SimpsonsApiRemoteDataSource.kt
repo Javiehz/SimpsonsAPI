@@ -9,27 +9,27 @@ import kotlinx.coroutines.withContext
 class SimpsonsApiRemoteDataSource(private val apiClient: ApiClient) {
     val apiService = apiClient.createService(SimpsonsApiService::class.java)
 
-    suspend fun getAllSimpsons():Result<List<Simpson>>{
-        return withContext(Dispatchers.IO){
+    suspend fun getAllSimpsons(): Result<List<Simpson>> {
+        return withContext(Dispatchers.IO) {
             val apiResults = apiService.getAll()
-            if(apiResults.isSuccessful && apiResults.errorBody() == null){
-                val simpsonsApiModel : SimpsonsApiModel = apiResults.body()!!
-                val listSimpsonsApiModel : List<SimpsonApiModel> = simpsonsApiModel.results
+            if (apiResults.isSuccessful && apiResults.errorBody() == null) {
+                val simpsonsApiModel: SimpsonsApiModel = apiResults.body()!!
+                val listSimpsonsApiModel: List<SimpsonApiModel> = simpsonsApiModel.results
                 val simpsonModel = listSimpsonsApiModel.map { simpsonApiModel ->
                     simpsonApiModel.toModel()
                 }
-                 Result.success(simpsonModel)
+                Result.success(simpsonModel)
             } else {
-                 Result.failure(ErrorApp.ServerError)
+                Result.failure(ErrorApp.ServerError)
             }
         }
     }
 
-    suspend fun getByIdSimpson(id: Int):Result<Simpson>{
-        return withContext(Dispatchers.IO){
+    suspend fun getByIdSimpson(id: Int): Result<Simpson> {
+        return withContext(Dispatchers.IO) {
             val apiResults = apiService.getById(id)
-            if(apiResults.isSuccessful && apiResults.errorBody() == null){
-                val simpsonApiModel : SimpsonApiModel = apiResults.body()!!
+            if (apiResults.isSuccessful && apiResults.errorBody() == null) {
+                val simpsonApiModel: SimpsonApiModel = apiResults.body()!!
                 val simpson = simpsonApiModel.toModel()
                 Result.success(simpson)
             } else {

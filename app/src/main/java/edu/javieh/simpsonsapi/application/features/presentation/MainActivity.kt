@@ -5,14 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
 import edu.javieh.simpsonsapi.R
-import edu.javieh.simpsonsapi.application.core.api.ApiClient
-import edu.javieh.simpsonsapi.application.features.data.remote.SimpsonsDataRepository
-import edu.javieh.simpsonsapi.application.features.data.remote.api.SimpsonsApiRemoteDataSource
-import edu.javieh.simpsonsapi.application.features.domain.GetAllSimpsonsUseCase
-import edu.javieh.simpsonsapi.application.features.domain.GetByIdSimpsonUseCase
-import edu.javieh.simpsonsapi.application.features.domain.SimpsonsRepository
+
 
 class MainActivity : AppCompatActivity() {
 
