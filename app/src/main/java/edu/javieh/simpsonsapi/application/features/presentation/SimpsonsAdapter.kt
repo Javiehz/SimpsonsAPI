@@ -10,7 +10,9 @@ import coil3.load
 import edu.javieh.simpsonsapi.R
 
 
-class SimpsonsAdapter : RecyclerView.Adapter<SimpsonsAdapter.SimpsonViewHolder>() {
+class SimpsonsAdapter(
+    private val onItemClick: (Int) -> Unit
+) : RecyclerView.Adapter<SimpsonsAdapter.SimpsonViewHolder>() {
 
     private var simpsons: List<Simpson> = mutableListOf()
 
@@ -20,7 +22,8 @@ class SimpsonsAdapter : RecyclerView.Adapter<SimpsonsAdapter.SimpsonViewHolder>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpsonViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.simpson_item_layout, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.simpson_item_layout, parent, false)
         return SimpsonViewHolder(view)
     }
 
@@ -37,6 +40,10 @@ class SimpsonsAdapter : RecyclerView.Adapter<SimpsonsAdapter.SimpsonViewHolder>(
             binding.siTvName.text = simpson.name
             binding.siTvOccupation.text = simpson.occupation
             binding.siIvPhoto.load(simpson.imageUrl)
+
+            binding.root.setOnClickListener {
+                onItemClick(simpson.id)
+            }
         }
     }
 }

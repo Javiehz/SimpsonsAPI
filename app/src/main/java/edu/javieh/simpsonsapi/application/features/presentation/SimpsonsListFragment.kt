@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import edu.javieh.simpsonsapi.application.core.api.ApiClient
 import edu.javieh.simpsonsapi.application.features.data.remote.SimpsonsDataRepository
@@ -20,7 +21,14 @@ class SimpsonsListFragment : Fragment() {
     private var _binding: FragmentSimpsonsListBinding? = null
     private val binding get() = _binding!!
 
-    private val simpsonsAdapter = SimpsonsAdapter()
+    private val simpsonsAdapter = SimpsonsAdapter { simpsonId ->
+        val action =
+            SimpsonsListFragmentDirections.actionSimpsonsListFragmentToSimpsonsDetailFragment(
+                    simpsonId
+                )
+
+        findNavController().navigate(action)
+    }
 
     private val dataRepository = SimpsonsDataRepository(
         SimpsonsApiRemoteDataSource(ApiClient())
@@ -36,8 +44,7 @@ class SimpsonsListFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSimpsonsListBinding.inflate(inflater, container, false)
         return binding.root

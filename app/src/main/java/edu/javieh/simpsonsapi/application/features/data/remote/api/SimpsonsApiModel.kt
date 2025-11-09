@@ -3,14 +3,14 @@ package edu.javieh.simpsonsapi.application.features.data.remote.api
 import com.google.gson.annotations.SerializedName
 
 data class SimpsonsApiModel(
-        val count: Int,
-        val next: String?,
-        val prev: String?,
-        val pages: Int,
-        val results: List<SimpsonApiModel>
+    val count: Int,
+    val next: String?,
+    val prev: String?,
+    val pages: Int,
+    val results: List<CharacterApiModel>
 )
 
-data class SimpsonApiModel(
+data class CharacterApiModel(
     val id: Int,
     val age: Int?,
     val birthdate: String?,

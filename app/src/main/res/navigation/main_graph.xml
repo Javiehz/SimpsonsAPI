@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/simpsonsListFragment">
+
+    <fragment
+        android:id="@+id/simpsonsListFragment"
+        android:name="edu.javieh.simpsonsapi.application.features.presentation.SimpsonsListFragment"
+        tools:layout="@layout/fragment_simpsons_list">
+
+        <action
+            android:id="@+id/action_simpsonsListFragment_to_simpsonsDetailFragment"
+            app:destination="@id/simpsonsDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/simpsonsDetailFragment"
+        android:name="edu.javieh.simpsonsapi.application.features.presentation.SimpsonDetailFragment"
+        tools:layout="@layout/fragment_simpson_detail">
+
+        <argument
+            android:name="simpsonId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>

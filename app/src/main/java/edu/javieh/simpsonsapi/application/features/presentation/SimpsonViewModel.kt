@@ -11,28 +11,28 @@ import kotlinx.coroutines.launch
 
 class SimpsonViewModel(private val getByIdSimpsonUseCase: GetByIdSimpsonUseCase) : ViewModel() {
 
-        private val _uiState = MutableLiveData<UiState>()
-        val uiState : LiveData<UiState> = _uiState
+    private val _uiState = MutableLiveData<UiState>()
+    val uiState: LiveData<UiState> = _uiState
 
-    fun loadById(id: Int){
+    fun loadById(id: Int) {
         viewModelScope.launch {
             _uiState.value = UiState(isLoading = true)
-            getByIdSimpsonUseCase(id).fold({onSuccess(it)}, {onFailure(it as ErrorApp)})
+            getByIdSimpsonUseCase(id).fold({ onSuccess(it) }, { onFailure(it as ErrorApp) })
         }
     }
 
 
-    private fun onSuccess(simpson: Simpson){
+    private fun onSuccess(simpson: Simpson) {
         _uiState.value = UiState(simpson = simpson)
     }
 
-    private fun onFailure(error: ErrorApp){
+    private fun onFailure(error: ErrorApp) {
         _uiState.value = UiState(error = error)
     }
 
     data class UiState(
-        val error : ErrorApp?=null,
-        val isLoading : Boolean = false,
-        val simpson : Simpson?=null
+        val error: ErrorApp? = null,
+        val isLoading: Boolean = false,
+        val simpson: Simpson? = null
     )
 }

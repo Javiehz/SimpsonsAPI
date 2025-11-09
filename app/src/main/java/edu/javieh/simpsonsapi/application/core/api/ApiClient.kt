@@ -13,7 +13,7 @@ class ApiClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun <T> createService(typeClass:Class<T>):T{
+    fun <T> createService(typeClass: Class<T>): T {
         return retrofit.create(typeClass)
-    }   
+    }
 }

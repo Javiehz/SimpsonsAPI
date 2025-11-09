@@ -14,17 +14,18 @@ class SimpsonsViewModel(private val getAllSimpsonsUseCase: GetAllSimpsonsUseCase
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
 
-    fun loadAllSimpsons(){
+    fun loadAllSimpsons() {
         viewModelScope.launch {
             _uiState.value = UiState(isLoading = true)
-            getAllSimpsonsUseCase().fold({onSuccess(it)}, {onFailure(it as ErrorApp)})
+            getAllSimpsonsUseCase().fold({ onSuccess(it) }, { onFailure(it as ErrorApp) })
         }
     }
 
-    private fun onFailure(error: ErrorApp){
+    private fun onFailure(error: ErrorApp) {
         _uiState.value = UiState(error = error)
     }
-    private fun onSuccess(simpsons: List<Simpson>){
+
+    private fun onSuccess(simpsons: List<Simpson>) {
         _uiState.value = UiState(simpsons = simpsons)
     }
 

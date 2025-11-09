@@ -13,23 +13,25 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/material_dynamic_tertiary10"
+        android:padding="5dp"
         android:text="@string/title"
         android:textAlignment="center"
         android:textColor="@color/material_dynamic_tertiary60"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="edu.javieh.simpsonsapi.application.features.presentation.SimpsonsListFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:navGraph="@navigation/main_graph" />
 </androidx.constraintlayout.widget.ConstraintLayout>
